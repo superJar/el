@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.el.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.el.entity.User">
+        <id column="ID" property="id" />
+        <result column="USERNAME" property="username" />
+        <result column="PASSWORD" property="password" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="ENABLED" property="enabled" />
+        <result column="SPARE" property="spare" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, USERNAME, PASSWORD, CREATED_TIME, ENABLED, SPARE
+    </sql>
+
+
+    <select id="findByUsername" resultType="com.el.entity.User">
+        select <include refid="Base_Column_List"></include> from user where username = #{username}
+    </select>
+
+
+    <select id="findRolesByUsername" resultType="java.lang.String">
+        select r.ROLE_CODE from user u
+                                  left join user_role sur on u.ID = ur.USER_ID
+                                  left join role r on r.ID = ur.ROLE_ID
+        where username = #{username}
+    </select>
+
+
+    <select id="findAuthoritiesByRoles" resultType="java.lang.String">
+        select p.URI from role r
+        left join role_permission rp on r.ID = rp.ROLE_ID
+        left join permission p on p.ID = rp.PERMISSION_ID
+        where r.ROLE_CODE in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+</mapper>

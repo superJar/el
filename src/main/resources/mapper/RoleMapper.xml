@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.el.mapper.RoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.el.entity.Role">
+        <id column="ID" property="id" />
+        <result column="ROLE_NAME" property="roleName" />
+        <result column="STATUS" property="status" />
+        <result column="ROLE_CODE" property="roleCode" />
+        <result column="SORT" property="sort" />
+        <result column="CREATED_TIME" property="createdTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, ROLE_NAME, STATUS, ROLE_CODE, SORT, CREATED_TIME
+    </sql>
+
+    <select id="getCount" resultType="java.lang.Integer">
+
+    </select>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.el.mapper.MemberMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.el.entity.Member">
+        <id column="ID" property="id" />
+        <result column="CARD_NUM" property="cardNum" />
+        <result column="NAME" property="name" />
+        <result column="NICKNAME" property="nickname" />
+        <result column="GENDER" property="gender" />
+        <result column="PHONE" property="phone" />
+        <result column="BALANCE" property="balance" />
+        <result column="ADDITIONAL_BALANCE" property="additionalBalance" />
+        <result column="SUM_OF_TOP_UP" property="sumOfTopUp" />
+        <result column="SUM_OF_CONSUMPTION" property="sumOfConsumption" />
+        <result column="REMARK" property="remark" />
+        <result column="CREATED_BY" property="createdBy" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_BY" property="updatedBy" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="SPARE1" property="spare1" />
+        <result column="SPARE2" property="spare2" />
+        <result column="SPARE3" property="spare3" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, CARD_NUM, NAME, NICKNAME, GENDER, PHONE, BALANCE, ADDITIONAL_BALANCE, SUM_OF_TOP_UP, SUM_OF_CONSUMPTION, REMARK, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, SPARE1, SPARE2, SPARE3
+    </sql>
+
+</mapper>

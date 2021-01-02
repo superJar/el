@@ -1,0 +1,20 @@
+server:
+  port: 11111
+  servlet:
+    session:
+      timeout: 60s
+      cookie:
+        http-only: false #如果为true，则浏览器JS脚本无法访问cookie
+        secure: false #如果为true，则仅支持https携带cookie，http的请求无法携带cookie
+spring:
+  #数据库
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/el_db?characterEncoding=UTF-8&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+# mybatis配置
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
