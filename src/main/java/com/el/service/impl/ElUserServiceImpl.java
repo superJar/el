@@ -7,6 +7,7 @@ import com.el.entity.User;
 import com.el.mapper.UserMapper;
 import com.el.service.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import javax.annotation.Resource;
  * @time:16:24
  * @details:
  */
+@Service
 public class ElUserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Resource
