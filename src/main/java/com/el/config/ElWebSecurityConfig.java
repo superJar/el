@@ -43,6 +43,7 @@ public class ElWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/login.html","/login").permitAll()
+                .antMatchers("/index").authenticated()
                 .anyRequest().access("@rbacService.hasPermission(request,authentication)")
                 .and()
                 .sessionManagement()
