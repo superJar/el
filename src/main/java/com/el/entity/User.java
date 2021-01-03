@@ -23,7 +23,6 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author superJar
  * @since 2020-12-31
  */
-@Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("user")
@@ -69,6 +68,17 @@ public class User extends Model<User> implements UserDetails {
     @TableField("SPARE")
     private String spare;
 
+    @TableField(exist = false)
+    private boolean accountNonExpired;
+    @TableField(exist = false)
+    private boolean accountNonLock;
+    @TableField(exist = false)
+    private boolean credentialsNonExpired;
+
+
+
+
+
 
     @Override
     protected Serializable pkVal() {
@@ -98,5 +108,77 @@ public class User extends Model<User> implements UserDetails {
     @Override
     public boolean isEnabled() {
         return this.enabled == 1? true : false;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
+    public void setSpare(String spare) {
+        this.spare = spare;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public void setAccountNonLock(boolean accountNonLock) {
+        this.accountNonLock = accountNonLock;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public User() {
+    }
+
+    public User(Integer id, String username, String password, LocalDateTime createdTime, Integer enabled, Collection<? extends GrantedAuthority> authorities, String spare, boolean accountNonExpired, boolean accountNonLock, boolean credentialsNonExpired) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.createdTime = createdTime;
+        this.enabled = enabled;
+        this.authorities = authorities;
+        this.spare = spare;
+        this.accountNonExpired = accountNonExpired;
+        this.accountNonLock = accountNonLock;
+        this.credentialsNonExpired = credentialsNonExpired;
     }
 }

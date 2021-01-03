@@ -4,9 +4,11 @@ import com.el.handler.ElLoginSuccessHandler;
 import com.el.handler.ElSessionExpireHandler;
 import com.el.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,11 +22,11 @@ import javax.annotation.Resource;
  * @time:12:21
  * @details:
  */
+@Configuration
+@EnableWebSecurity
 public class ElWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private ElLoginSuccessHandler elLoginSuccessHandler;
-
-    private ElSessionExpireHandler elSessionExpireHandler = new ElSessionExpireHandler();
 
     @Resource
     private UserServiceImpl userService;
@@ -34,7 +36,9 @@ public class ElWebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .formLogin()
                 .loginPage("/login.html")
+//                .loginPage("/login")
                 .loginProcessingUrl("/login")
+//                .loginProcessingUrl("/login")
                 .successHandler(elLoginSuccessHandler)
                 .and()
                 .authorizeRequests()
@@ -48,7 +52,7 @@ public class ElWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .migrateSession()
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(false)
-                .expiredSessionStrategy(elSessionExpireHandler);
+                .expiredSessionStrategy(new ElSessionExpireHandler());
 
     }
 
@@ -59,7 +63,7 @@ public class ElWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/static/**");
+        web.ignoring().antMatchers("/static/**","/login");
     }
 
     @Bean("passwordEncoder")

@@ -2,6 +2,9 @@ package com.el.controller;
 
 import com.el.common.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +29,18 @@ public class IOController {
         try {
 
             //处理逻辑...
+            XSSFWorkbook wb =new XSSFWorkbook();
+
 
             return Result.ok();
         } catch (Exception e) {
             log.error("操作失败！{}", e.getMessage(), e);
             return Result.fail("操作失败！");
         }
+    }
+
+    public static void main(String[] args) {
+        PasswordEncoder p = new BCryptPasswordEncoder();
+        System.out.println(p.encode("666"));
     }
 }

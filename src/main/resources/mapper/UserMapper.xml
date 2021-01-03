@@ -19,13 +19,13 @@
 
 
     <select id="findByUsername" resultType="com.el.entity.User">
-        select <include refid="Base_Column_List"></include> from user where username = #{username}
+        select * from user where username = #{username,jdbcType=VARCHAR}
     </select>
 
 
     <select id="findRolesByUsername" resultType="java.lang.String">
         select r.ROLE_CODE from user u
-                                  left join user_role sur on u.ID = ur.USER_ID
+                                  left join user_role ur on u.ID = ur.USER_ID
                                   left join role r on r.ID = ur.ROLE_ID
         where username = #{username}
     </select>
